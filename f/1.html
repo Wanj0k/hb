@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для самой прекрасной</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            color: #333;
+        }
+
+        @keyframes gradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .card {
+            width: 350px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.7;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% {transform: rotate(-5deg);}
+            50% {transform: rotate(5deg);}
+        }
+
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #f8c291;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <div class="photo-frame">
+                    <!-- Замените src на фото вашей девушки или оставьте placeholder -->
+                    <img src="1.jpg" alt="Самая красивая">
+                </div>
+                <h1>Люблю тебя!</h1>
+                <p>Нажми на открытку, чтобы увидеть сюрприз!</p>
+                <div class="flowers">
+                    <div class="flower" style="top: 10%; left: 15%;">🌹</div>
+                    <div class="flower" style="top: 80%; left: 75%;">🌻</div>
+                    <div class="flower" style="top: 60%; left: 10%;">🌸</div>
+                    <div class="flower" style="top: 20%; left: 80%;">🌷</div>
+                </div>
+            </div>
+            <div class="card-back">
+                <h1>Ты - мое чудо, спасибо что ты у меня есть</h1>
+                <p>30 января оказался самым значимым днем для меня</p>
+				<p>твоя улыбка - 8-е чудо света(как и твоя красота)</p>
+				<p>чтоб хуй стоял и бабки были</p>
+				<p>Пасиба твоим родителям, за моего котенка</p>
+                <div class="signature">от твоего любимки)))</div>
+                <div class="flowers">
+                    <div class="flower" style="top: 15%; left: 25%;">💐</div>
+                    <div class="flower" style="top: 85%; left: 65%;">🌺</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Создаем летающие сердечки
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            
+            // Рандомная позиция
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            
+            // Рандомный размер
+            const size = Math.random() * 20 + 10;
+            heart.style.fontSize = size + 'px';
+            
+            // Рандомная анимация
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            
+            document.body.appendChild(heart);
+            
+            // Удаляем сердечко после анимации
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        
+        // Создаем сердечки каждые 300мс
+        setInterval(createHearts, 300);
+        
+        // Добавляем музыку (раскомментируйте и укажите путь к файлу)
+        /*
+        window.onload = function() {
+            const audio = new Audio('ваша-мелодия.mp3');
+            audio.loop = true;
+            audio.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+        }
+        */
+    </script>
+</body>
+</html>
